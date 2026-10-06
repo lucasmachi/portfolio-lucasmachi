@@ -1,0 +1,620 @@
+@font-face {
+  font-family: 'Copyduck';
+  src: url('/fonts/Copyduck.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  color: #302b35;
+  background: #ffe497;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --ink: #302b35;
+  --blue: #3971aa;
+  --red: #c94e4b;
+  --yellow: #efc348;
+
+  /* Fontes provisórias dos personagens. */
+  --font-recruiter: 'Trebuchet MS', Arial, sans-serif;
+  --font-friend: 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: block;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #ffe497;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 5px,
+      #68533306 5px 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 5px,
+      #68533306 5px 6px
+    );
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+button:focus-visible {
+  outline: 3px solid #234e7c;
+  outline-offset: 6px;
+}
+
+h1:focus,
+h2:focus {
+  outline: none;
+}
+
+/* Texto disponível para leitores de tela. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Tela de seleção */
+
+.portfolio-shell {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  padding: 40px 24px 28px;
+}
+
+.portfolio-title {
+  margin: 0;
+  font-family: 'Copyduck', sans-serif;
+  font-size: clamp(2.8rem, 8vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: .01em;
+}
+
+.portfolio-title span {
+  display: inline-block;
+  -webkit-text-stroke: 1px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 2px 4px 0 var(--ink);
+}
+
+.portfolio-title span:nth-child(1) {
+  color: var(--yellow);
+  transform: rotate(-3deg);
+}
+
+.portfolio-title span:nth-child(2) {
+  color: #5796cd;
+  transform: rotate(2deg);
+}
+
+.portfolio-title span:nth-child(3) {
+  color: #e46b62;
+  transform: rotate(-2deg);
+}
+
+.eyebrow {
+  margin: 30px 0 0;
+  font-size: .75rem;
+  font-weight: bold;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin: 26px 0 36px;
+  font-size: .95rem;
+}
+
+.patch-panel {
+  position: relative;
+  background: #fff9eb;
+  border: 2px solid var(--ink);
+  border-radius: 22px 16px 24px 18px;
+  padding: 34px;
+  box-shadow: 6px 7px 0 #cbbda5;
+}
+
+.patch-panel::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 2px dashed #b9a88b;
+  border-radius: 14px 9px 16px 11px;
+  pointer-events: none;
+}
+
+.selection-panel {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.selection-panel h2 {
+  margin: 0 0 25px;
+  font-size: clamp(1.25rem, 4vw, 1.65rem);
+}
+
+.character-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.character-button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 12px 14px;
+  background: #e0eafa;
+  border: 2px solid var(--ink);
+  border-radius: 12px 18px 13px 16px;
+  box-shadow: 3px 4px 0 #b1bfd0;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.character-button::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px dashed #728aa5;
+  border-radius: 8px 12px 9px 11px;
+  pointer-events: none;
+}
+
+.character-recruiter {
+  font-family: var(--font-recruiter);
+}
+
+.character-friend {
+  font-family: var(--font-friend);
+  background: #f7b3b3;
+  box-shadow: 3px 4px 0 #ce8589;
+}
+
+.character-friend::before {
+  border-color: #bd626c;
+}
+
+.character-button:hover {
+  transform: translateY(-4px);
+  border-color: var(--ink);
+}
+
+.character-button[aria-pressed='true'] {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  transform: translateY(-4px);
+  box-shadow: 5px 7px 0 var(--yellow);
+}
+
+.portrait-patch {
+  display: grid;
+  place-items: center;
+  width: min(100%, 172px);
+  aspect-ratio: 1;
+  background: #fff8e8;
+  border: 2px dashed #97856b;
+  border-radius: 9px;
+}
+
+.character-face {
+  display: block;
+  width: min(100%, 152px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.character-label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.selection-marker {
+  font-size: .75rem;
+  line-height: 1.4;
+}
+
+.selection-status {
+  margin: 25px 0 18px;
+  font-size: .875rem;
+}
+
+/* Botões com costura */
+
+.stitched-button {
+  position: relative;
+  padding: 15px 24px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 3px 4px 0 var(--ink);
+  transition: transform 150ms ease;
+}
+
+.stitched-button::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed currentColor;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.stitched-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+}
+
+.stitched-button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 2px 0 var(--ink);
+}
+
+.start-button {
+  background: var(--yellow);
+  font-weight: bold;
+  min-width: 220px;
+}
+
+.start-button span {
+  margin-left: 12px;
+}
+
+.start-button:disabled {
+  cursor: not-allowed;
+  background: #ded6c7;
+  color: #625c53;
+  box-shadow: 2px 3px 0 #9f9482;
+}
+
+/* Música */
+
+.audio-settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: min(100%, 520px);
+  margin: 28px auto 0;
+}
+
+.sound-button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  padding: 12px;
+  background: var(--blue);
+  color: #fff;
+}
+
+.sound-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.mini-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  min-height: 62px;
+  padding: 12px 16px;
+  background: #edf3fc;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 3px 4px 0 #b1bfd0;
+}
+
+.music-note {
+  flex-shrink: 0;
+  color: var(--blue);
+  font-size: 1.7rem;
+}
+
+.track-info {
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+/* O texto fica recortado dentro do bloco de música. */
+.track-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.track-marquee-content {
+  display: flex;
+  width: max-content;
+  animation: rolar-musica 16s linear infinite;
+}
+
+/* Cada cópia inclui o espaço até o próximo título. */
+.track-title {
+  display: block;
+  flex: 0 0 auto;
+  margin: 0;
+  padding-right: 48px;
+  font-size: .78rem;
+  font-weight: bold;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+@keyframes rolar-musica {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.mini-player:hover .track-marquee-content {
+  animation-play-state: paused;
+}
+
+/* Barrinhas decorativas ao lado do título. */
+.track-bars {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 3px;
+  height: 14px;
+  color: var(--blue);
+}
+
+.track-bars i {
+  width: 3px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.track-bars i:nth-child(2),
+.track-bars i:nth-child(4) {
+  height: 10px;
+}
+
+.track-bars i:nth-child(3) {
+  height: 14px;
+}
+
+.audio-error {
+  color: #9d2529;
+}
+
+audio[controls] {
+  display: block;
+  width: min(100%, 360px);
+  margin: 0 auto 20px;
+}
+
+/* Área do jogo */
+
+.game-container {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #253a32;
+  border-radius: 8px;
+  outline: 2px solid var(--ink);
+}
+
+.game-container canvas {
+  display: block;
+}
+
+.back-button {
+  background: #dce9f7;
+  font-size: .875rem;
+  font-weight: bold;
+}
+
+/* Durante a aventura, o cenário ocupa a janela. */
+
+.portfolio-shell.is-playing {
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 360px;
+  margin: 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.is-playing .adventure-panel {
+  flex: 1;
+  min-height: 180px;
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.is-playing .adventure-panel:focus {
+  outline: none;
+}
+
+.is-playing .patch-panel::before {
+  inset: 5px;
+  border-radius: 9px;
+}
+
+/* Apenas o botão BACK, alinhado à esquerda. */
+.game-toolbar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.is-playing .back-button {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: .75rem;
+}
+
+.is-playing .game-container {
+  flex: 1;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  aspect-ratio: auto;
+  margin: 0;
+}
+
+.is-playing .audio-settings {
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+.is-playing .mini-player {
+  min-height: 48px;
+  padding: 6px 12px;
+}
+
+.is-playing .sound-button {
+  height: 44px;
+  width: 44px;
+  flex-basis: 44px;
+  padding: 9px;
+}
+
+.is-playing .audio-error {
+  margin: 0;
+}
+
+.is-playing audio[controls] {
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+/* Celulares */
+
+@media (max-width: 520px) {
+  .portfolio-shell {
+    padding: 28px 16px 24px;
+  }
+
+  .patch-panel {
+    padding: 28px 20px;
+  }
+
+  .character-options {
+    gap: 16px;
+  }
+
+  .character-button {
+    padding: 16px 10px 12px;
+  }
+
+  .character-label {
+    font-size: .875rem;
+  }
+
+  .start-button {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .portfolio-shell.is-playing {
+    padding: 5px;
+    gap: 6px;
+  }
+
+  .is-playing .adventure-panel {
+    padding: 10px;
+  }
+
+  .is-playing .back-button {
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 370px) {
+  .character-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Respeita a preferência do sistema por menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .track-marquee-content {
+    display: block;
+    width: auto;
+    transform: none;
+  }
+
+  .track-title {
+    padding-right: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .track-title + .track-title {
+    display: none;
+  }
+}
+
+@font-face {
+  font-family: 'SuperMarioLike';
+  src: url('/fonts/supermariolike_font.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
